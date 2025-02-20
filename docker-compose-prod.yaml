@@ -1,11 +1,9 @@
-version: '3'
-
 services:
   web:
     build: .
-    command: gunicorn netflix.wsgi:application --bind 0.0.0.0:8000
+    command: gunicorn netflix.wsgi:application --bind 0.0.0.0:8765
     expose:
-      - 8000
+      - 8765
     volumes:
       - media_file:/app/media
       - static_files:/app/staticfiles
@@ -21,7 +19,7 @@ services:
   nginx:
     build: ./nginx
     ports:
-      - 80:80
+      - 9090:80
     volumes:
       - media_file:/app/media
       - static_files:/app/staticfiles
